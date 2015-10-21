@@ -1,0 +1,27 @@
+{
+	"name": "silverstripe-rebelalliance/route-whitelist",
+	"description": "Provides a standard way to whitelist specific url patterns.",
+	"type": "silverstripe-module",
+	"keywords": ["silverstripe", "routes", "404", "DDOS"],
+	"authors": [
+		{
+			"name": "julian Seidenberg",
+			"email": "julian@silverstripe.com"
+		},
+		{
+			"name": "Frank Mullenger",
+			"email": "frank@silverstripe.com"
+		},
+		{
+			"name": "Oly Su",
+			"email": "oly@silverstripe.com"
+		},
+		{
+			"name": "Christopher Joe",
+			"email": "cjoe@silverstripe.com"
+		}
+	],
+	"require": {
+		"silverstripe/framework": "~3.1"
+	}
+}
