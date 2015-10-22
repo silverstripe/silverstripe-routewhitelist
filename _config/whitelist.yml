@@ -1,0 +1,9 @@
+---
+Name: whitelist
+After: 'versionedfiles','upload','coreconfig'
+---
+SiteTree:
+  extensions:
+    - SiteTreeWhitelistExtension
+WhitelistGenerator:
+  dir: 'routeWhitelistCache'

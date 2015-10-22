@@ -1,5 +1,5 @@
 {
-	"name": "silverstripe-rebelalliance/route-whitelist",
+	"name": "silverstripe-rebelalliance/routewhitelist",
 	"description": "Provides a standard way to whitelist specific url patterns.",
 	"type": "silverstripe-module",
 	"keywords": ["silverstripe", "routes", "404", "DDOS"],
