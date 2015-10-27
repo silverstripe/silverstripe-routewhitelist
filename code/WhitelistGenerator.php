@@ -105,7 +105,7 @@ class WhitelistGenerator extends Object implements Flushable {
 			mkdir($dir); //create a new whitelist dir
 			chmod($dir,0777);    //make sure it is readable by the web-server user
 			//copy in htaccess file to ensure that the whitelist cache directory is not web-accessible 
-			copy(BASE_PATH.DIRECTORY_SEPARATOR.'whitelist'.DIRECTORY_SEPARATOR.'extra'.DIRECTORY_SEPARATOR.'htaccess',
+			copy(BASE_PATH.DIRECTORY_SEPARATOR.'routewhitelist'.DIRECTORY_SEPARATOR.'extra'.DIRECTORY_SEPARATOR.'htaccess',
 				$dir.DIRECTORY_SEPARATOR.'.htaccess');
 		}
 	}

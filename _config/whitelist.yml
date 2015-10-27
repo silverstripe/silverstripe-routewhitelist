@@ -6,4 +6,4 @@ SiteTree:
   extensions:
     - SiteTreeWhitelistExtension
 WhitelistGenerator:
-  dir: 'routeWhitelistCache'
+  dir: 'routewhitelistcache'
