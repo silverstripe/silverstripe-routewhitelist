@@ -48,12 +48,13 @@ ErrorDocument 500 /assets/error-500.html
 	RewriteRule silverstripe-cache(/|$) - [F,L,NC]
 	RewriteRule composer\.(json|lock) - [F,L,NC]
 	
-	# Route Whitelist: send known invalid URLs straight to the 404 error page
-	RewriteCond %{REQUEST_URI} !^/.?$
-    RewriteCond %{REQUEST_URI} ^/(.*?)/.*$
-    RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/%1 !-f [NC]
-	RewriteRule  .* /assets/error-404.html [L]
-	
+	#routewhitelist: send known invalid URLs straight to the 404 error page
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/.htaccess -f
+    RewriteCond %{REQUEST_URI} ^\/(.+?)(\/.*|\s*)$
+    RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/%1 !-f 
+    RewriteRule  .* /assets/error-404.html [L]
+
 	# Process through SilverStripe if no file with the requested name exists.
 	# Pass through the original path as a query parameter, and retain the existing parameters.
 	RewriteCond %{REQUEST_URI} ^(.*)$

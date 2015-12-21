@@ -104,9 +104,15 @@ class WhitelistGenerator extends Object implements Flushable {
 		if (!file_exists($dir)) {
 			mkdir($dir); //create a new whitelist dir
 			chmod($dir,0777);    //make sure it is readable by the web-server user
-			//copy in htaccess file to ensure that the whitelist cache directory is not web-accessible 
-			copy(BASE_PATH.DIRECTORY_SEPARATOR.'routewhitelist'.DIRECTORY_SEPARATOR.'extra'.DIRECTORY_SEPARATOR.'htaccess',
-				$dir.DIRECTORY_SEPARATOR.'.htaccess');
+			//create a htaccess file to ensure that the whitelist cache directory is not web-accessible 
+			file_put_contents($dir.DIRECTORY_SEPARATOR.'.htaccess', "Deny from all\n");
+		}
+	}
+	
+	public static function clearWhitelist(){
+		$dir = BASE_PATH . DIRECTORY_SEPARATOR . Config::inst()->get('WhitelistGenerator', 'dir');
+		if (!file_exists($dir)) {
+			array_map('unlink', glob($dir."/*"));
 		}
 	}
 

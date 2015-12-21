@@ -17,12 +17,13 @@ not supported.
 To install the module copy it into your SilverStripe folder, then replace the standard SilverStripe .htaccess file 
 with the file in routewhitelist/extra/htaccess and run a ?flush=all.
  
-If you have modifed the standard SilverStripe .htaccess file, insert the following snippet into your modified file 
+If you have modified the standard SilverStripe .htaccess file, insert the following snippet into your modified file 
 at an appropriate location:
 
-    # Route Whitelist: send known invalid URLs straight to the 404 error page
-    RewriteCond %{REQUEST_URI} !^/.?$
-    RewriteCond %{REQUEST_URI} ^/(.*?)/.*$
-    RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/%1 !-f [NC]
-	RewriteRule  .* /assets/error-404.html [L]
-	
+    #routewhitelist: send known invalid URLs straight to the 404 error page
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/.htaccess -f
+    RewriteCond %{REQUEST_URI} ^\/(.+?)(\/.*|\s*)$
+    RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/%1 !-f 
+	RewriteRule  .* assets/error-404.html [L]
+
