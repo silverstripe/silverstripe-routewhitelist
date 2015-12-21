@@ -19,7 +19,7 @@ and "localhost:81" works, but "localhost/myawesomewebsite" doesn't work.
 ## Installation
 To install this module run:
 
-	composer require silverstripe/route-whitelist
+	composer require silverstripe/route-whitelist:*
 
 To configure the module replace the standard SilverStripe .htaccess file with the file in routewhitelist/extra/htaccess. You can do this
  by running the following commands:
