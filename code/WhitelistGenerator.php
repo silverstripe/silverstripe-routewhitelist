@@ -6,7 +6,7 @@ class WhitelistGenerator extends Object implements Flushable {
 		self::syncCacheFilesystem($whitelist);
 	}
 	
-	static protected function generateWhitelistRules(){
+	static function generateWhitelistRules(){
 		//get all URL rules
 		$rules = Config::inst()->get('Director', 'rules');
 		
