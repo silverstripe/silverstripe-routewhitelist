@@ -13,11 +13,12 @@ first segment doesn't match any known controller, route, or top-level page.
 The Route Whitelist relies on the Apache's htaccess system to compare the first segment to the URL. Nginx is currently 
 not supported.
 
-Route Whitelist also only works with SilverStripe installations in the domain route. So, a site running at: myawesomewebsite.com works
-and localhost:81 works, but localhost/myawesomewebsite doesn't work.
+Route Whitelist also only works with SilverStripe installations in the domain route. So, a site running at: "myawesomewebsite.com" works
+and "localhost:81" works, but "localhost/myawesomewebsite" doesn't work.
 
 ## Installation
 To install this module run:
+
 	composer require silverstripe/route-whitelist
 
 To configure the module replace the standard SilverStripe .htaccess file with the file in routewhitelist/extra/htaccess. You can do this
