@@ -53,7 +53,7 @@ ErrorDocument 500 /assets/error-500.html
     RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/.htaccess -f
     RewriteCond %{REQUEST_URI} ^\/(.+?)(\/.*|\s*)$
     RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/%1 !-f 
-    RewriteRule  .* /assets/error-404.html [L]
+    RewriteRule  .* /assets/error-404.html [L,R=404]
 
 	# Process through SilverStripe if no file with the requested name exists.
 	# Pass through the original path as a query parameter, and retain the existing parameters.

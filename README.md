@@ -37,5 +37,5 @@ at an appropriate location near the top of the mod_rewrite rules:
     RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/.htaccess -f
     RewriteCond %{REQUEST_URI} ^\/(.+?)(\/.*|\s*)$
     RewriteCond %{DOCUMENT_ROOT}/routewhitelistcache/%1 !-f 
-	RewriteRule  .* assets/error-404.html [L]
+	RewriteRule  .* assets/error-404.html [L,R=404]
 
