@@ -53,6 +53,9 @@ class WhitelistGenerator extends Object implements Flushable {
 
 		//filter duplicates (order doesn't matter here, as we are only interested in the first level of the rules)
 		$filteredRules = array_unique($filteredRules);
+		
+		//add home url
+		$filteredRules[] = 'home';
 		return $filteredRules;
 	}
 
