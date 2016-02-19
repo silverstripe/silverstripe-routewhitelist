@@ -2,7 +2,7 @@
 Provides a whitelist of known valid URL patterns in a SilverStripe website.
 
 ## Overview
-This modules take the approach that while routing is a difficult problem, there is a subset of the routing problem that is 
+This module takes the approach that while routing is a difficult problem, there is a subset of the routing problem that is 
 quite easy to solve. So, while is a very difficult computation involving multiple database queries to figure out if a 
 given URL is invalid and should result in a 404, or is valid and should be routed to a certain controller, it is much
 easier to figure out that a given URL is definitely invalid and will under no circumstances result in a valid response.
@@ -19,7 +19,7 @@ and "localhost:81" works, but "localhost/myawesomewebsite" doesn't work.
 ## Installation
 To install this module run:
 
-	composer require silverstripe/route-whitelist:*
+	composer require silverstripe/routewhitelist:*
 
 To configure the module replace the standard SilverStripe .htaccess file with the file in routewhitelist/extra/htaccess. You can do this
  by running the following commands:
