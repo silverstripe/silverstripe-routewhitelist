@@ -33,6 +33,24 @@ class WhitelistGeneratorTest extends SapphireTest{
 		$this->assertContains('WhitelistTestController', $whitelist);
 	}
 	
+	function testSiteTreeVersionsIncludedInWhitelist() {
+		$top1 = $this->objFromFixture('SiteTree', 'top1');
+		$top1->publish('Stage', 'Live');    //publish the page so it has been live and needs redirecting to
+		
+		$newSegment = 'new-url-segment';
+		$oldSegment = $top1->URLSegment;
+		$top1->URLSegment = $newSegment;
+		$top1->write();
+		$top1->publish('Stage', 'Live');    //publish again with a new URL
+		
+
+		$whitelist = WhitelistGenerator::generateWhitelistRules();
+
+		//ensure both the old and the new URLs are included in the whitelist
+		$this->assertContains($newSegment, $whitelist); 
+		$this->assertContains($oldSegment, $whitelist);
+	}
+	
 }
 
 class WhitelistTestController extends ContentController {

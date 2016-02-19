@@ -7,3 +7,4 @@ SiteTree:
     - SiteTreeWhitelistExtension
 WhitelistGenerator:
   dir: 'routewhitelistcache'
+  includeSiteTreeVersions: true

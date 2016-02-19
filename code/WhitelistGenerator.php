@@ -32,14 +32,22 @@ class WhitelistGenerator extends Object implements Flushable {
 					} 
 					
 				} elseif ($rule === '$URLSegment') {
+					$topLevelPagesArray = array();  //temporary array to store top-level pages
+					
 					//special case for SiteTree, add all possible top Level Pages
 					$topLevelPages = SiteTree::get()->filter('ParentID', 0);
 					
 					foreach($topLevelPages as $page) {
 						$link = $page->RelativeLink();
-						array_push($filteredRules, trim($link, '\/ ')); //remove trailing or leading slashes from links
+						array_push($topLevelPagesArray, trim($link, '\/ ')); //remove trailing or leading slashes from links
 					}
-					
+
+					//fetch old top-level pages URLs from the SiteTree_versions table
+					if (Config::inst()->get('WhitelistGenerator', 'includeSiteTreeVersions')) {
+						$oldTopLevelPagesArray = self::find_old_top_level_pages($topLevelPagesArray);
+					}
+
+					$filteredRules = array_merge($filteredRules, $topLevelPagesArray, $oldTopLevelPagesArray);
 				} else {
 					user_error('Unknown wildcard URL match found: '.$rule, E_WARNING);
 					
@@ -98,6 +106,37 @@ class WhitelistGenerator extends Object implements Flushable {
 		foreach($toCreate as $create) {
 			touch($dir . DIRECTORY_SEPARATOR . $create);
 		}
+	}
+
+	/**
+	 * Does a database query searching through past URLs of top-level pages, returning any URLs previously used for
+	 * pages in the SiteTree. This is to ensure that OldPageRedirector rules still apply correctly. That is, to ensure
+	 * that pages that have been renamed continue to redirect to their current versions, we add the pages' old URLs 
+	 * to the whitelist. 
+	 * @param $currentTopLevelPages
+	 * @return array URLs of past top-level pages
+	 */
+	protected static function find_old_top_level_pages($currentTopLevelPages){
+		$oldPageURLs = array();
+		
+		$query = new SQLSelect(
+			'DISTINCT (URLSegment)', 
+			'SiteTree_versions',
+			array(
+				'ParentID = 0',
+				'WasPublished = 1',
+				'URLSegment NOT IN (\''.implode("','",array_filter($currentTopLevelPages)).'\')'
+			)
+		);
+		
+		$records = $query->execute();
+		if ($records) {
+			foreach($records as $record) {
+				array_push($oldPageURLs, $record['URLSegment']);
+			}
+		}
+		
+		return $oldPageURLs;
 	}
 	
 	static function ensureWhitelistFolderExists(){
