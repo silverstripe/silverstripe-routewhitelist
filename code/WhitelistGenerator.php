@@ -20,7 +20,7 @@ class WhitelistGenerator extends Object implements Flushable {
 			}
 		}
 		
-		$filteredRules = array();
+		$filteredRules = array('home'); //add 'home' url, as default
 		foreach($allTopLevelRules as $rule) {
 			if (strpos($rule, '$') !== false) {
 				if ($rule === '$Controller') {
@@ -54,8 +54,6 @@ class WhitelistGenerator extends Object implements Flushable {
 		//filter duplicates (order doesn't matter here, as we are only interested in the first level of the rules)
 		$filteredRules = array_unique($filteredRules);
 		
-		//add home url
-		$filteredRules[] = 'home';
 		return $filteredRules;
 	}
 
