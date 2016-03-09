@@ -130,7 +130,12 @@ class WhitelistGenerator extends Object implements Flushable {
 	protected static function find_old_top_level_pages($currentTopLevelPages){
 		$oldPageURLs = array();
 
-		$query = new SQLSelect(
+		$queryClass = 'SQLSelect';
+		if (!class_exists($queryClass) && class_exists('SQLQuery')){
+			$queryClass = 'SQLQuery';
+		}
+		
+		$query = new $queryClass(
 			'DISTINCT (URLSegment)',
 			'SiteTree_versions',
 			array(
