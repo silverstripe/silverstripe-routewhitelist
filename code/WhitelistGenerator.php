@@ -21,6 +21,12 @@ class WhitelistGenerator extends Object implements Flushable {
 		}
 
 		$filteredRules = array('home'); //add 'home' url, as default
+		
+		$addToWhitelist = Config::inst()->get('WhitelistGenerator', 'addToWhitelist');
+		if ($addToWhitelist && is_array($addToWhitelist)) {
+			$filteredRules = array_merge($filteredRules, $addToWhitelist);
+		}
+		
 		foreach($allTopLevelRules as $rule) {
 			if (strpos($rule, '$') !== false) {
 				if ($rule === '$Controller') {
@@ -60,6 +66,11 @@ class WhitelistGenerator extends Object implements Flushable {
 
 		//filter duplicates (order doesn't matter here, as we are only interested in the first level of the rules)
 		$filteredRules = array_unique($filteredRules);
+
+		$removeFromWhitelist = Config::inst()->get('WhitelistGenerator', 'removeFromWhitelist');
+		if ($removeFromWhitelist && is_array($removeFromWhitelist)) {
+			$filteredRules = array_merge(array_diff($filteredRules, $removeFromWhitelist));
+		}
 
 		return $filteredRules;
 	}

@@ -8,3 +8,6 @@ SiteTree:
 WhitelistGenerator:
   dir: 'routewhitelistcache'
   includeSiteTreeVersions: true
+  addToWhitelist:
+    - "home"
+  removeFromWhitelist:

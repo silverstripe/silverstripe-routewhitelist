@@ -138,6 +138,33 @@ class WhitelistGeneratorTest extends SapphireTest {
         // Exact number depends on what addons are installed, so just go with 'some'
         $this->assertGreaterThan(90, sizeof($files));
     }
+	
+	public function testAddToWhitelist() {
+		$addToList = array('test', 'create', 'this-is-top-level', 'random-URL-string', '____', '-----');
+		$removeFromList = array('home', 'create', 'xzy', 'about-us');
+		
+		Config::inst()->update('WhitelistGenerator', 'addToWhitelist', $addToList);
+		
+		$whitelist = WhitelistGenerator::generateWhitelistRules();
+
+		foreach($addToList as $add) {
+			$this->assertContains($add, $whitelist);
+		}
+	}
+	
+	public function testRemoveFromWhitelist() {
+		$addToList = array('create');
+		$removeFromList = array('home', 'create', 'xzy', 'about-us');
+
+		Config::inst()->update('WhitelistGenerator', 'addToWhitelist', $addToList);
+		Config::inst()->update('WhitelistGenerator', 'removeFromWhitelist', $removeFromList);
+
+		$whitelist = WhitelistGenerator::generateWhitelistRules();
+
+		foreach($removeFromList as $remove) {
+			$this->assertNotContains($remove, $whitelist);
+		}
+	}
 
 }
 
