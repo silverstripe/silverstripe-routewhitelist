@@ -12,6 +12,9 @@ class WhitelistGenerator extends Object implements Flushable {
 
 		$allTopLevelRules = array();
 		foreach ($rules as $pattern => $controllerOptions) {
+			//allow for route rules starting with double-slash (//)
+			$pattern = ltrim($pattern, '/!');
+
 			//match first portion of the URL, either delimited by slash or colon or end-of-line
 			if (preg_match('/^(.*?)(\/|:|$)/', $pattern, $matches)){
 				if (!empty($matches[1])){
@@ -19,7 +22,6 @@ class WhitelistGenerator extends Object implements Flushable {
 				}
 			}
 		}
-
 		$filteredRules = array('home'); //add 'home' url, as default
 		
 		$addToWhitelist = Config::inst()->get('WhitelistGenerator', 'addToWhitelist');
