@@ -14,8 +14,6 @@
 [![Dependency Status](https://www.versioneye.com/php/silverstripe:routewhitelist/badge.svg)](https://www.versioneye.com/php/silverstripe:routewhitelist)
 [![Reference Status](https://www.versioneye.com/php/silverstripe:routewhitelist/reference_badge.svg?style=flat)](https://www.versioneye.com/php/silverstripe:routewhitelist/references)
 
-![codecov.io](https://codecov.io/github/silverstripe/silverstripe-routewhitelist/branch.svg?branch=master)
-
 
 Provides a whitelist of known valid URL patterns in a SilverStripe website.
 
