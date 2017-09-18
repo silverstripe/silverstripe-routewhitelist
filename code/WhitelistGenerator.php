@@ -41,6 +41,7 @@ class WhitelistGenerator extends Object implements Flushable {
 
 				} elseif ($rule === '$URLSegment') {
 					$topLevelPagesArray = array();  //temporary array to store top-level pages
+					$oldTopLevelPagesArray = array();
 
 					//special case for SiteTree, add all possible top Level Pages
 					$topLevelPages = SiteTree::get()->filter('ParentID', 0);
