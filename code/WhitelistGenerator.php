@@ -1,5 +1,5 @@
 <?php
-class WhitelistGenerator extends Object implements Flushable {
+class WhitelistGenerator extends SS_Object implements Flushable {
 
 	public static function generateWhitelist(){
 		$whitelist = self::generateWhitelistRules();
